@@ -1,8 +1,50 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Calculator";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Web Development</h1>
+    <h3 class="display-6">App 01: Calculator</h3>
+    <p>Building a Calculator</p>
+                           
+                        <a class="nav-link" onclick="darkMode()"><i class="fa-solid fa-moon-stars"></i></a>
+                        
 </div>
+
+<div class="text-center">
+<table class = "calculator" >
+ <tr>
+<td colspan = "5"> <input class = "display-box" type = "text" id = "result" disabled /> </td>
+ <!-- clearScreen() function clear all the values -->
+ 
+ </tr>
+ <tr>
+ <!-- display() function display the value of clicked button -->
+ <td> <input class = "button" type = "button" value = "7" onclick = "display('7')" /> </td>
+ <td> <input class = "button" type = "button" value = "8" onclick = "display('8')" /> </td>
+ <td> <input class = "button" type = "button" value = "9" onclick = "display('9')" /> </td>
+ <td> <input class = "button" type = "button" value = ":" onclick = "display(':')" /> </td>
+ <td> <input class = "button" type = "button" value = "+/-" onclick = "display('+/-')" /> </td>
+ </tr>
+ <tr>
+ <td> <input class = "button" type = "button" value = "4" onclick = "display('4')" /> </td>
+ <td> <input class = "button" type = "button" value = "5" onclick = "display('5')" /> </td>
+ <td> <input class = "button" type = "button" value = "6" onclick = "display('6')" /> </td>
+ <td> <input class = "button" type = "button" value = "-" onclick = "display('x')" /> </td>
+ <td> <input class = "button" type = "button" value = "C" onclick = "clearScreen()" style = "background-color: #fb0066;" /> </td> 
+ </tr>
+ <tr>
+ <td> <input class = "button" type = "button" value = "1" onclick = "display('1')" /> </td>
+ <td> <input class = "button" type = "button" value = "2" onclick = "display('2')" /> </td>
+ <td> <input class = "button" type = "button" value = "3" onclick = "display('3')" /> </td>
+ <td> <input class = "button" type = "button" value = "+" onclick = "display('-')" /> </td>
+ <td rowspan = "2"> <input class = "button" type = "button" value = "=" onclick = "calculate()" style = "background-color: #fb0066;" /> </td>
+ </tr>
+ <tr>
+ <td colspan = "2"> <input class = "button" type = "button" value = "0" onclick = "display('0')" /> </td>
+ <td> <input class = "button" type = "button" value = "," onclick = "display(',')" /> </td>
+ <td> <input class = "button" type = "button" value = "+" onclick = "display('+')" /> </td>
+ <!-- calculate() function evaluate the mathematical expression -->
+ </tr>
+ </table>
+ </div>
