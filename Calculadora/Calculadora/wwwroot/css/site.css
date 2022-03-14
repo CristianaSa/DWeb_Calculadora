@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
 
 :root {
+    --page-darkmode-bg:#423149;
     --calculator-bg: #191b28;
     --calculator-display-box: #000000;
     --calculator-button-bg:#64278f;
@@ -30,7 +31,7 @@ td{
 }
 
 .dark-mode {
-    background-color: black;
+    background-color: var(--page-darkmode-bg);
     color: white;
 }
 

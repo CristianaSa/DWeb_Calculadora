@@ -4,7 +4,14 @@
 // Write your JavaScript code.
 
  
-   function darkMode() {
-   var element = document.body;
-    element.classList.toggle("dark-mode");
+   function darkMode(x) {
+       var element = document.body;
+       element.classList.toggle("mystyle");
+       element.classList.toggle("dark-mode");
+       x.classList.toggle("fa-sun");
+
+
+
+     
+        
 }
