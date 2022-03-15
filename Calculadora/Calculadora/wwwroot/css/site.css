@@ -26,9 +26,9 @@ body {
   margin-bottom: 60px;
 }
 
-td{
+/*td{
     padding: 5px;
-}
+}*/
 
 .dark-mode {
     background-color: var(--page-darkmode-bg);
