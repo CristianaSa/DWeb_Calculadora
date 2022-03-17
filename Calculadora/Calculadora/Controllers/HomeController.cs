@@ -21,9 +21,9 @@ namespace Calculadora.Controllers
         }
 
         [HttpPost] //Esta anotação já é obrigatória, para o método 'escutar'
-        public IActionResult Index(string botao, string visor, string visorDados, string operacao)
+        public IActionResult Index(string botao, string visor, string operando, string operacao, string limpaVisor)
         {
-           switch (botao)
+            switch (botao)
             {
                 case "0":
                 case "1":
@@ -35,30 +35,65 @@ namespace Calculadora.Controllers
                 case "7":
                 case "8":
                 case "9":
-                    //Caso exista uma operacao que não seja virgula, limpa o visor
-                    if (operacao != null && operacao != ",") visor = "";
+
                     //Atribuir ao visor o algarismo selecionado
-                    if (visor != "0") visor = visor + botao;
-                    else visor = botao;
+                    if (visor != "0" && limpaVisor != "sim") visor = visor + botao;
+                    else { visor = botao; }
+
+                    limpaVisor = "nao";
+
                     break;
                 case "-":
                 case "+":
                 case "x":
                 case ":":
-                    // guardar operacao
-                    operacao = botao;
-                    //guardar o numero que está no visor num outro input para receber o novo
-                    visorDados = visor;
+                    if (!string.IsNullOrEmpty(operacao)) { 
+              
+                        double numOperando = double.Parse(operando);
+                        double numVisor = double.Parse(visor);
+                        switch (operacao)
+                        {
+                            case "+":
+                                visor = (numOperando + numVisor).ToString();
+                                break;
+                            case "-":
+                                visor = (numOperando - numVisor).ToString();
+                                break;
+                            case "x":
+                                visor = (numOperando * numVisor).ToString();
+                                break;
+                            case ":":
+                                visor = (numOperando / numVisor).ToString();
+                                    break;
+                 
+                            default:
+                                break;
+                        }
+
+                        operacao = botao;
+                        operando = visor;
+                        limpaVisor = "sim";
+
+                    }
+ 
                     break;
                 case ",":
-                    operacao = botao;
+
+                    if (limpaVisor != "sim") {
+                        visor = "0,";
+                        limpaVisor = "nao";
+
+                    }
+                    else { 
                     //verifica se o visor é diferente de "0" e se não contém virgula
-                    if (visor != "0" && visor.Contains(operacao) == false) visor = visor + botao;
+                    if (visor != "0" && !visor.Contains(",")) visor = visor + ",";
+                        //if (visor == "0" && !visor.Contains(",")) visor = "0,"; 
+                    }
                     break;
                 case "=":
                    //converte a string para float (numero real)
-                    float num1 = float.Parse(visorDados);
-                    float num2 = float.Parse(visor);
+                    double num1 = double.Parse(operando);
+                    double num2 = double.Parse(visor);
                    
                     //operaçoes
                     if (operacao == "+") visor = (num1 + num2).ToString();
@@ -68,11 +103,15 @@ namespace Calculadora.Controllers
                     break;
                 case "+/-":
                     //multiplica o valor do visor por -1
-                    visor = (float.Parse(visor) * -1).ToString();  
+                    visor = (double.Parse(visor) * -1).ToString(); 
+                    
                     break;
                 case "C":
                     //limpar o ecrã
                     visor = "0";
+                    operando ="";
+                    operacao="";
+                    limpaVisor = "nao";
                     break;
                 default:
                     break;
@@ -80,8 +119,9 @@ namespace Calculadora.Controllers
 
             //Preparar os dados a serem enviados para a View
             ViewBag.Visor = visor;
-            ViewBag.VisorDados = visorDados;
+            ViewBag.Operando = operando;
             ViewBag.Operacao = operacao;
+            ViewBag.LimpaVisor =limpaVisor;
             return View();
         }
 
